@@ -1,4 +1,4 @@
-const moongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const cursoSchema = new mongoose.Schema({
     titulo: {

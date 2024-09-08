@@ -67,7 +67,7 @@ ruta.post('/', (req, res) => {
     }
 });
 
-//Endpoint de tipo PUT para el recurso usuarios //Función Actualizar usuarios
+ //Función asincrona para Actualizar usuarios
 
 async function actualizarUsuario(email, body){
     let usuario = await Usuario.findeOneAnUpdate({"email": email},{ 

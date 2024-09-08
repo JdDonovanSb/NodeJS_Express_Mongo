@@ -27,28 +27,6 @@ nombre: Joi.string()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //funcion asincrona para craer un objeto de tipo usuario 
 async function CrearUsuario(body) 
 {
@@ -60,5 +38,62 @@ async function CrearUsuario(body)
         return await usuario.save();    
 }
 
+//Endpoint de tipo POST para el recurso usuarios
+ruta.post('/', (req, res) => {
+    let body = req.body;
+
+    const {error, value} = schema.validate({nombre: body.nombre, email: body.email});
+    if (!error){
+        let resultado = CrearUsuario(body);
+
+        resultado.then(user =>{
+            res.json({
+                valor: user
+            })
+        }).catch (err =>{
+            res.status(400).json({
+                err
+            })
+        });
+    }else{
+        res.status(400).json({
+            error
+        })
+    }
+});
+
+//Endpoint de tipo PUT para el recurso usuarios //Función Actualizar usuarios
+
+async function actualizarUsuario(email, body){
+    let usuario = await Usuario.findeOneAnUpdate({"email": email},{ 
+        $set: {
+            nombre: body.nombre, 
+            password: body.password
+        }
+    },{new: true});
+        return usuario;
+
+}
+
+// Endpoint de tipo Put para actualizar los datos del usuario
+ruta.put ('/:email', (req, res)=>{
+    const {error, value} = schema.validate({nombre : req.body.nombre});
+    if(!error){
+        let resultado = actualizarUsuario(req.params.email, req.body);
+        resultado.then(valor =>{
+            res.json({
+                valor
+            })
+        }).catch(err =>{
+            res.status(400).json({
+                err
+            })
+        });
+    }else{
+        res.status(400).json({
+            error
+        })
+    }
+});
 
 module.exports = ruta;

@@ -5,7 +5,7 @@ const cursos = require('./controllers/cursos');
 const express = require('express');
 const mongoose = require('mongoose'); 
 // Conexión a la dase de datos mongodb
-mongoose.connect ('mongodb://localhost:27017/', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect ('mongodb+srv://donovanboni:AMGhSKt7mD0eApIf@cluster0.3kkiw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('Conectado a MongoDB.. '))
     .catch(err => console.log('No se pudo conectar con MongoDB..', err));
 // middlewareconst 

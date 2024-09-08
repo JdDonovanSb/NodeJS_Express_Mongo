@@ -24,6 +24,12 @@ nombre: Joi.string()
 
 });
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> apirest
 //funcion asincrona para craer un objeto de tipo usuario 
 async function CrearUsuario(body) 
 {

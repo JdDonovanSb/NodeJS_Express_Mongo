@@ -21,6 +21,27 @@ ruta.post('/', (req, res) => {
         })
 });
 
+// Endpoint de tipo Put para el recurso cursos
+ruta.put ('/:id', (req, res)=>{
+        let resultado = actualizarCurso(req.params.id, req.body);
+        resultado.then(curso =>{
+            res.json(curso)
+        }).catch(err =>{
+            res.status(400).json(err)
+        })
+    })
+    
+ //Función asincrona para Actualizar cursos
+
+ async function actualizarCurso(id, body){
+    let curso = await Curso.findByIdAndUpdate(id,{ 
+        $set: {
+            titulo: body.titulo, 
+            descripcion: body.descripcion
+        }
+    },{new: true});
+        return curso;
+}
 
 //funcion asincrona para craer un objeto de tipo curso
 async function Crearcurso(body) 

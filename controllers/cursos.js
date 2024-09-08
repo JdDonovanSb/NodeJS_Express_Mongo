@@ -30,6 +30,16 @@ ruta.put ('/:id', (req, res)=>{
             res.status(400).json(err)
         })
     })
+
+//Endpoint de tipo Delete parael recurso  Cursos
+ruta.delete('/:id', (req, res)=>{
+    let resultado = desactivarCurso(req.params.id);
+    resultado.then(curso=>{
+        res.json(curso)  
+    }).catch(err =>{
+        res.status(400).json(err)
+    })
+})  
     
  //Función asincrona para Actualizar cursos
 
@@ -53,6 +63,16 @@ async function Crearcurso(body)
             calificacion: body.calificacion
         });
         return await curso.save();    
+}
+
+//Funcion asincrona para activar o inactivar un curso
+async function desactivarCurso (id){
+    let curso = await Curso.findByIdAndUpdate(id, {
+        $set: {
+            estado: false
+        }
+    }, {new:true});
+    return curso;
 }
 
 

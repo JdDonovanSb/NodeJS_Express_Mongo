@@ -1,7 +1,5 @@
 const usuarios = require('./controllers/usuarios');
 const cursos = require('./controllers/cursos');
-
-
 const express = require('express');
 const mongoose = require('mongoose'); 
 // Conexión a la dase de datos mongodb

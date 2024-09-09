@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const usuarioSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -20,7 +19,11 @@ const usuarioSchema = new mongoose.Schema({
     imagen: {
         type: String,
         required: false
-    }
+    },
+    cursos: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Curso', // Referencia al modelo Curso
+        required: false
+    }]
 });
-
-module.exports = mongoose.model('usuario', usuarioSchema);
+module.exports = mongoose.model('Usuario', usuarioSchema);

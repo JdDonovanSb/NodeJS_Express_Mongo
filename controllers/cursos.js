@@ -5,22 +5,22 @@ const ruta = express.Router();
 //Endpoint de tipo get refactorizado para el recurso Cursos. Lista todos los Cursos
 ruta.get('/', (req, res) => {
     let resultado = listarCursosActivos();
-    resultado.then(cursos =>{ 
-        res.json(cursos)
-    }).catch(err =>{
+    resultado.then(cursos => { 
+        res.json(cursos);
+    }).catch(err => {
         res.status(400).json(err);
     })
 });
 
 //Endpoint de tipo POST para el recurso usuarios
 ruta.post('/', (req, res) => {
-        let resultado = CrearCurso(body);
+        let resultado = crearCurso(req.body);
 
-        resultado.then(curso =>{
+        resultado.then(curso => {
             res.json({
-                 curso
+                curso
             })
-        }).catch (err =>{
+        }).catch(err => {
             res.status(400).json({
                 err
             })
@@ -60,9 +60,8 @@ ruta.delete('/:id', (req, res)=>{
 }
 
 //funcion asincrona para craer un objeto de tipo curso
-async function Crearcurso(body) 
-{
-        let usuario = new Curso({
+async function crearCurso(body) {
+        let curso = new Curso({
             titulo:    body.titulo,
             descripcion:   body.descripcion,
             alumnos: body.alumnos, 
@@ -84,7 +83,7 @@ async function desactivarCurso (id){
 //Funcion asincrona para Listar todos los cursos activos
 async function listarCursosActivos(){
     let cursos = await Curso.find({"estado": true});
-    return Cursos;
+    return cursos;
 }
 
 module.exports = ruta;

@@ -70,7 +70,7 @@ ruta.post('/', (req, res) => {
  //Función asincrona para Actualizar usuarios
 
 async function actualizarUsuario(email, body){
-    let usuario = await Usuario.findeOneAnUpdate({"email": email},{ 
+    let usuario = await Usuario.findOneAndUpdate({"email": email},{ 
         $set: {
             nombre: body.nombre, 
             password: body.password
